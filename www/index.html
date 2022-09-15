@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Takehome Test</title>
+        <link rel="stylesheet" href="/assets/css/styles.css">
+    </head>
+    <body>
+        <div class="wrapper">
+            <h3 class="title">Create New User</h3>
+            <form>
+                <input type="hidden" id="token" value="" />
+                <div class="row">
+                    <div class="label">
+                        Name
+                    </div>
+                    <div class="input">
+                        <input type="text" id="name" name="name" placeholder="Enter Your Name" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="label">
+                        Email
+                    </div>
+                    <div class="input">
+                        <input type="text" id="email" name="email" placeholder="Enter Your Email" />
+                    </div>
+                </div>
+                <div class="button-wrapper">
+                    <button type="submit">Create</button>
+                </div>
+            </form>
+            <div class="graphic-wrapper">
+                <div class="graphic"></div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            document.addEventListener("DOMContentLoaded", function() {
+                fetch("/rest-api/generate_token.php")
+                    .then(res => res.json())
+                    .then(data => {
+                        document.querySelector('#token').value = data.token;
+                    });
+            });
+            var form = document.querySelector('form');
+            form.addEventListener("submit", function(e) {
+                e.preventDefault();
+                var token = document.querySelector('#token').value;
+                var name = document.querySelector('#name').value;
+                var email = document.querySelector('#email').value;
+                if (name && email) {
+                    var data = { name, email };
+                    fetch("/rest-api/create_user.php", {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/json;charset=UTF-8',
+                            'Authorization': 'Bearer ' + token
+                        },
+                        body: JSON.stringify(data)
+                    }).then(res => {
+                        console.log("Request complete! response:", res);
+                        alert('New User Created!');
+                        form.reset();
+                    }).catch(function (error) {
+                        console.log(error);
+                    }); 
+                } else {
+                    alert("Please complete the form.");
+                }
+            });
+        </script>
+    </body>
+</html>
