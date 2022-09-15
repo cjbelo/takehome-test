@@ -12,8 +12,9 @@ API Endpoints:
 * (GET) http://18.140.65.80/rest-api/list_names.php
 * (GET) http://18.140.65.80/rest-api/get_data.php?id=1
 
-*Hit generate_token api to get the token*
-*Use Bearer Token for Authorization when testing the API*
+*Hit generate_token api to get the token.*
+
+*Use Bearer Token for Authorization when testing the API.*
 
 ---
 
