@@ -27,7 +27,7 @@ API Endpoints:
     `git clone git@github.com:cjbelo/takehome-test.git`
 2. Run Docker command and wait until 3 containers are running
     `docker compose up -d` 
-3. Once the containers are running, visit http://localhost:8080 to open PHPMyAdmin. You can import the SQL file to create the table for signups.
+3. Once the containers are running, visit http://localhost:8080 to open PHPMyAdmin. You can import the SQL file included in this repo `signups.sql` to create the table for signups.
 4. When successful, you can start testing the app and API.
 
 Demo App Local: http://localhost/
